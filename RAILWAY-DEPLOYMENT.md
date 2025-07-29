@@ -4,7 +4,7 @@ This guide will help you deploy the OSS AI Models API to Railway, a modern hosti
 
 ## 📋 Prerequisites
 
-1. **Railway Account**: [Sign up at railway.app](https://railway.app)
+1. **Railway Account**: [Sign up at railway.com](https://railway.com)
 2. **Git Repository**: Your code should be in a Git repository (GitHub, GitLab, etc.)
 3. **Railway CLI** (optional): `npm install -g @railway/cli`
 
@@ -20,16 +20,15 @@ This guide will help you deploy the OSS AI Models API to Railway, a modern hosti
    ```
 
 2. **Deploy on Railway**:
-   - Go to [railway.app](https://railway.app)
+   - Go to [railway.com](https://railway.com)
    - Click "Start a New Project"
    - Select "Deploy from GitHub repo"
    - Choose your repository
    - Railway will automatically detect it's a Node.js project
 
 3. **Configuration** (Automatic):
-   - Railway reads `railway.json` for configuration
    - Health check endpoint: `/api/health`
-   - Start command: `npm start`
+   - Start command: Auto-detected
    - Build command: Auto-detected
 
 ### Method 2: Railway CLI
@@ -127,23 +126,6 @@ curl "https://your-app.up.railway.app/api/stats"
 ```
 
 ## 🔧 Railway Configuration Files
-
-### `railway.json`
-```json
-{
-  "$schema": "https://railway.app/railway.schema.json",
-  "build": {
-    "builder": "nixpacks"
-  },
-  "deploy": {
-    "startCommand": "npm start",
-    "healthcheckPath": "/api/health",
-    "healthcheckTimeout": 100,
-    "restartPolicyType": "on_failure",
-    "restartPolicyMaxRetries": 10
-  }
-}
-```
 
 ### `package.json` Scripts
 ```json
@@ -256,26 +238,12 @@ The AI Models API is very efficient:
 - Use Railway's secure variable storage
 - Rotate any exposed credentials
 
-### CORS Configuration
-```javascript
-// Production CORS setup (already configured)
-const allowedOrigins = [
-  'https://ossmodels.dev',
-  'https://www.ossmodels.dev',
-  /^https:\/\/.*\.railway\.app$/
-];
-```
-
-### Rate Limiting
-- Default: 1000 requests per 15 minutes
-- Configurable via environment variables
-- Headers included for client information
 
 ## 📚 Additional Resources
 
-- **Railway Docs**: [docs.railway.app](https://docs.railway.app)
-- **Node.js on Railway**: [Railway Node.js Guide](https://docs.railway.app/guides/nodejs)
-- **Railway CLI**: [CLI Documentation](https://docs.railway.app/develop/cli)
+- **Railway Docs**: [docs.railway.com](https://docs.railway.com)
+- **Express on Railway**: [Railway Express Guide](https://docs.railway.com/guides/express)
+- **Railway CLI**: [CLI Documentation](https://docs.railway.com/guides/cli)
 
 ## 🎉 Success!
 
@@ -294,4 +262,4 @@ If you encounter issues:
 2. Verify environment variables
 3. Test health endpoint
 4. Review this deployment guide
-5. Check Railway's status page: [status.railway.app](https://status.railway.app)
+5. Check Railway's status page: [status.railway.com](https://status.railway.com)
