@@ -10,7 +10,7 @@ A comprehensive database of 50+ popular open source AI models with a powerful RE
 - **🌐 REST API**: Full-featured API with filtering, pagination, and search
 - **⚡ Vercel AI SDK Integration**: Ready-to-use endpoints for AI applications
 - **📱 Responsive UI**: Beautiful web interface that works on all devices
-- **🚀 Zero Setup**: Deploy to Vercel with one click
+- **🚀 Zero Setup**: Deploy to Railway with one click
 
 ## 🚀 Quick Start
 
