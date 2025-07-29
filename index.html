@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source AI Models Database</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Open Source AI Models Database</h1>
+            <p>Discover and explore the latest open source AI models</p>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="Search models..." />
+            <div class="filters">
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="language">Language Models</option>
+                    <option value="vision">Computer Vision</option>
+                    <option value="audio">Audio/Speech</option>
+                    <option value="multimodal">Multimodal</option>
+                    <option value="embedding">Embeddings</option>
+                </select>
+                <select id="licenseFilter">
+                    <option value="">All Licenses</option>
+                    <option value="MIT">MIT</option>
+                    <option value="Apache-2.0">Apache 2.0</option>
+                    <option value="GPL-3.0">GPL 3.0</option>
+                    <option value="CC-BY-SA">CC BY-SA</option>
+                </select>
+                <select id="providerFilter">
+                    <option value="">All Providers</option>
+                    <option value="Hugging Face">Hugging Face</option>
+                    <option value="Ultralytics">Ultralytics</option>
+                </select>
+                <select id="sortBy">
+                    <option value="name">Sort by Name</option>
+                    <option value="date">Sort by Date</option>
+                    <option value="downloads">Sort by Downloads</option>
+                    <option value="stars">Sort by Stars</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number" id="totalModels">0</span>
+                <span class="stat-label">Total Models</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="filteredModels">0</span>
+                <span class="stat-label">Filtered Results</span>
+            </div>
+        </div>
+
+        <div class="models-grid" id="modelsGrid">
+            <!-- Models will be populated here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
