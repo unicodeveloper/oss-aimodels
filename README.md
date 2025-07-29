@@ -39,13 +39,17 @@ A comprehensive database of 50+ popular open source AI models with a powerful RE
 
 ### Production Deployment
 
-#### Deploy to Vercel (Recommended)
+#### Deploy to Railway (Recommended)
+
 ```bash
-# Install Vercel CLI
-npm i -g vercel
+# Install Railway CLI
+npm i -g @railway/cli
+
+# Initialize your project
+railway init
 
 # Deploy
-vercel --prod
+railway up
 ```
 
 #### Deploy with Docker
@@ -61,46 +65,48 @@ docker run -p 3000:3000 oss-ai-models
 
 ### Base URL
 ```
-https://ossmodels.dev/api
+https://aimodels.up.railway.app/api
 ```
 
 ### Get All Models
 ```bash
-curl "https://ossmodels.dev/api/models"
+curl "https://aimodels.up.railway.app/api/models"
 ```
 
 ### Filter Models
 ```bash
 # Get language models from Google
-curl "https://ossmodels.dev/api/models?category=language&provider=Google"
+curl "https://aimodels.up.railway.app/api/models?category=language&provider=Google"
 
 # Search for image generation models
-curl "https://ossmodels.dev/api/models?search=image&outputModality=Image"
+curl "https://aimodels.up.railway.app/api/models?search=image&outputModality=Image"
 
 # Get models with tool calling support
-curl "https://ossmodels.dev/api/models?toolCalling=Yes&limit=10"
+curl "https://aimodels.up.railway.app/api/models?toolCalling=Yes&limit=10"
 ```
 
 ### Get Specific Model
 ```bash
-curl "https://ossmodels.dev/api/models/llama-2"
+curl "https://aimodels.up.railway.app/api/models/Alpaca"
 ```
 
 ### Get Statistics
 ```bash
-curl "https://ossmodels.dev/api/stats"
+curl "https://aimodels.up.railway.app/api/stats"
 ```
+
+
 
 ## 🔧 Integration Examples
 
 ### JavaScript/Node.js
 ```javascript
 // Fetch all language models
-const response = await fetch('https://ossmodels.dev/api/models?category=language');
+const response = await fetch('https://aimodels.up.railway.app/api/models?category=language');
 const { data } = await response.json();
 
 // Search for specific capabilities
-const codingModels = await fetch('https://ossmodels.dev/api/models?search=coding&toolCalling=Yes');
+const codingModels = await fetch('https://aimodels.up.railway.app/api/models?search=coding&toolCalling=Yes');
 const results = await codingModels.json();
 ```
 
@@ -109,7 +115,7 @@ const results = await codingModels.json();
 import requests
 
 # Get vision models
-response = requests.get('https://ossmodels.dev/api/models', params={
+response = requests.get('https://aimodels.up.railway.app/api/models', params={
     'category': 'vision',
     'provider': 'Meta',
     'limit': 5
@@ -121,7 +127,7 @@ models = response.json()['data']
 ```typescript
 // Use with Vercel AI SDK for model discovery
 async function findBestModel(requirements: string) {
-  const response = await fetch('https://ossmodels.dev/api/ai/models', {
+  const response = await fetch('https://aimodels.up.railway.app/api/models', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -146,7 +152,6 @@ async function findBestModel(requirements: string) {
 ├── styles.css             # Styling
 ├── script.js              # Frontend JavaScript
 ├── package.json           # Dependencies
-├── vercel.json            # Vercel deployment config
 ├── API.md                 # Full API documentation
 └── README.md              # This file
 ```
@@ -241,7 +246,7 @@ interface AIModel {
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+Contributions are welcome! Here's how you can help:
 
 1. **Add Models**: Submit new open source AI models
 2. **Improve Data**: Enhance model descriptions and metadata
@@ -255,9 +260,9 @@ MIT License - feel free to use this in your own projects!
 ## 🔗 Links
 
 - **API Documentation**: [API.md](./API.md)
-- **Live Demo**: https://ossmodels.dev
-- **API Health**: https://ossmodels.dev/api/health
-- **Statistics**: https://ossmodels.dev/api/stats
+- **Live Demo**:  https://aimodels.up.railway.app
+- **API Health**: https://aimodels.up.railway.app/api/health
+- **Statistics**: https://aimodels.up.railway.app/api/stats
 
 ## 📧 Support
 
@@ -267,4 +272,4 @@ MIT License - feel free to use this in your own projects!
 
 ---
 
-Built with ❤️ for the open source AI community
+Vibe Coded & Built with ❤️ for the open source AI community
