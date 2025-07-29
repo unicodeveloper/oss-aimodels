@@ -18,8 +18,8 @@ A comprehensive database of 50+ popular open source AI models with a powerful RE
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd aiGPT
+   git clone git@github.com:unicodeveloper/oss-aimodels.git
+   cd oss-aimodels
    ```
 
 2. **Install dependencies**
