@@ -79,34 +79,6 @@ header p {
     border-color: #667eea;
 }
 
-.stats {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.stat-item {
-    background: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.stat-number {
-    display: block;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #667eea;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
 
 .models-grid {
     display: grid;
@@ -383,11 +355,6 @@ header p {
     
     .models-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .stats {
-        flex-direction: column;
-        gap: 15px;
     }
     
     .filters {

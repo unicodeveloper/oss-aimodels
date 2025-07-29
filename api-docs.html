@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSS AI Models API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .base-url {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 1.1rem;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .quick-link {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .quick-link h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .endpoints {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .endpoints h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        .endpoint {
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: #f8f9ff;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .method {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .method.get { background: #28a745; }
+        .method.post { background: #007bff; }
+
+        .endpoint-path {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .endpoint-description {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .try-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .try-button:hover {
+            background: #5a6fd8;
+        }
+
+        .parameters {
+            margin: 15px 0;
+        }
+
+        .parameters h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .param {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .param-name {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .param-type {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .response-viewer {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .response-viewer h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .response-output {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+        }
+
+        .loading {
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .endpoint-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 OSS AI Models API</h1>
+            <p>Comprehensive REST API for 50+ Open Source AI Models</p>
+        </div>
+
+        <div class="base-url">
+            <strong>Base URL:</strong> <span id="baseUrl">Loading...</span>
+        </div>
+
+        <div class="quick-links">
+            <a href="#endpoints" class="quick-link">
+                <h3>📚 Endpoints</h3>
+                <p>Explore all available API endpoints with examples</p>
+            </a>
+            <a href="http://localhost:3000/api/health" class="quick-link" target="_blank">
+                <h3>❤️ Health Check</h3>
+                <p>Check API status and basic information</p>
+            </a>
+            <a href="http://localhost:3000/api/models?limit=5" class="quick-link" target="_blank">
+                <h3>🤖 Browse Models</h3>
+                <p>View the first 5 AI models in the database</p>
+            </a>
+            <a href="http://localhost:3000/api/stats" class="quick-link" target="_blank">
+                <h3>📊 Statistics</h3>
+                <p>Get database statistics and insights</p>
+            </a>
+        </div>
+
+        <div class="response-viewer">
+            <h2>🧪 API Response Viewer</h2>
+            <p>Click any "Try it" button below to see live API responses</p>
+            <div class="response-output" id="responseOutput">
+                Click a "Try it" button to see API responses here...
+            </div>
+        </div>
+
+        <div class="endpoints" id="endpoints">
+            <h2>📋 Available Endpoints</h2>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/health</span>
+                </div>
+                <div class="endpoint-description">
+                    Check API status and get basic information about the database.
+                </div>
+                <div class="example">curl "http://localhost:3000/api/health"</div>
+                <button class="try-button" onclick="tryEndpoint('/api/health')">Try it</button>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/models</span>
+                </div>
+                <div class="endpoint-description">
+                    Get all AI models with optional filtering, searching, sorting, and pagination.
+                </div>
+                <div class="parameters">
+                    <h4>Query Parameters:</h4>
+                    <div class="param">
+                        <span class="param-name">category</span>
+                        <span class="param-type">string</span>
+                        <span>Filter by category (language, vision, audio, multimodal, embedding)</span>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">provider</span>
+                        <span class="param-type">string</span>
+                        <span>Filter by provider (Google, Meta, OpenAI, etc.)</span>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">search</span>
+                        <span class="param-type">string</span>
+                        <span>Search in name, description, tags, and use cases</span>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">limit</span>
+                        <span class="param-type">number</span>
+                        <span>Number of results to return (max 100, default 50)</span>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">sortBy</span>
+                        <span class="param-type">string</span>
+                        <span>Sort by: name, date, downloads, stars, parameters</span>
+                    </div>
+                </div>
+                <div class="example">curl "http://localhost:3000/api/models?category=language&limit=3"</div>
+                <button class="try-button" onclick="tryEndpoint('/api/models?limit=3')">Try it</button>
+                <button class="try-button" onclick="tryEndpoint('/api/models?category=language&limit=2')">Try Language Models</button>
+                <button class="try-button" onclick="tryEndpoint('/api/models?search=image&limit=2')">Search "image"</button>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/models/{identifier}</span>
+                </div>
+                <div class="endpoint-description">
+                    Get a specific model by name (case-insensitive) or array index.
+                </div>
+                <div class="example">curl "http://localhost:3000/api/models/llama-2"</div>
+                <button class="try-button" onclick="tryEndpoint('/api/models/llama 2')">Try LLaMA 2</button>
+                <button class="try-button" onclick="tryEndpoint('/api/models/whisper')">Try Whisper</button>
+                <button class="try-button" onclick="tryEndpoint('/api/models/0')">Try First Model</button>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/filters</span>
+                </div>
+                <div class="endpoint-description">
+                    Get all available filter options for categories, providers, licenses, and capabilities.
+                </div>
+                <div class="example">curl "http://localhost:3000/api/filters"</div>
+                <button class="try-button" onclick="tryEndpoint('/api/filters')">Try it</button>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/stats</span>
+                </div>
+                <div class="endpoint-description">
+                    Get database statistics including model distribution, provider breakdown, and totals.
+                </div>
+                <div class="example">curl "http://localhost:3000/api/stats"</div>
+                <button class="try-button" onclick="tryEndpoint('/api/stats')">Try it</button>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/api/ai/models</span>
+                </div>
+                <div class="endpoint-description">
+                    Vercel AI SDK compatible endpoint for AI model discovery and selection.
+                </div>
+                <div class="parameters">
+                    <h4>Request Body:</h4>
+                    <div class="param">
+                        <span class="param-name">query</span>
+                        <span class="param-type">string</span>
+                        <span>Search query for model discovery</span>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">filters</span>
+                        <span class="param-type">object</span>
+                        <span>Filter criteria (category, provider, toolCalling, etc.)</span>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">limit</span>
+                        <span class="param-type">number</span>
+                        <span>Number of models to return (max 20, default 10)</span>
+                    </div>
+                </div>
+                <div class="example">curl -X POST "http://localhost:3000/api/ai/models" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "coding assistant", "filters": {"category": "language"}, "limit": 3}'</div>
+                <button class="try-button" onclick="tryAIEndpoint()">Try AI SDK Endpoint</button>
+            </div>
+        </div>
+
+        <div class="stats-grid" id="liveStats">
+            <!-- Live stats will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Get current base URL
+        const getBaseUrl = () => {
+            return window.location.origin;
+        };
+
+        // Update all URLs in the documentation
+        function updateUrls() {
+            const baseUrl = getBaseUrl();
+            document.getElementById('baseUrl').textContent = `${baseUrl}/api`;
+            
+            // Update quick links
+            document.querySelector('a[href="http://localhost:3000/api/health"]').href = `${baseUrl}/api/health`;
+            document.querySelector('a[href="http://localhost:3000/api/models?limit=5"]').href = `${baseUrl}/api/models?limit=5`;
+            document.querySelector('a[href="http://localhost:3000/api/stats"]').href = `${baseUrl}/api/stats`;
+            
+            // Update example URLs in endpoint descriptions
+            updateExampleUrls(baseUrl);
+        }
+
+        function updateExampleUrls(baseUrl) {
+            const examples = document.querySelectorAll('.example');
+            examples.forEach(example => {
+                example.textContent = example.textContent.replace(/http:\/\/localhost:3000/g, baseUrl);
+            });
+        }
+
+        // Load live statistics on page load
+        window.addEventListener('load', () => {
+            updateUrls();
+            loadLiveStats();
+        });
+
+        async function tryEndpoint(path) {
+            const responseOutput = document.getElementById('responseOutput');
+            responseOutput.textContent = 'Loading...';
+            responseOutput.className = 'response-output loading';
+
+            try {
+                const baseUrl = getBaseUrl();
+                const response = await fetch(`${baseUrl}${path}`);
+                const data = await response.json();
+                
+                responseOutput.textContent = JSON.stringify(data, null, 2);
+                responseOutput.className = 'response-output';
+            } catch (error) {
+                responseOutput.textContent = `Error: ${error.message}`;
+                responseOutput.className = 'response-output';
+            }
+        }
+
+        async function tryAIEndpoint() {
+            const responseOutput = document.getElementById('responseOutput');
+            responseOutput.textContent = 'Loading...';
+            responseOutput.className = 'response-output loading';
+
+            try {
+                const baseUrl = getBaseUrl();
+                const response = await fetch(`${baseUrl}/api/ai/models`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: 'coding assistant',
+                        filters: {
+                            category: 'language',
+                            toolCalling: 'Yes'
+                        },
+                        limit: 3
+                    })
+                });
+                
+                const data = await response.json();
+                responseOutput.textContent = JSON.stringify(data, null, 2);
+                responseOutput.className = 'response-output';
+            } catch (error) {
+                responseOutput.textContent = `Error: ${error.message}`;
+                responseOutput.className = 'response-output';
+            }
+        }
+
+        async function loadLiveStats() {
+            try {
+                const baseUrl = getBaseUrl();
+                const response = await fetch(`${baseUrl}/api/stats`);
+                const { data } = await response.json();
+                
+                const statsContainer = document.getElementById('liveStats');
+                statsContainer.innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-number">${data.totalModels}</div>
+                        <div class="stat-label">Total Models</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${Object.keys(data.categories).length}</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${Object.keys(data.providers).length}</div>
+                        <div class="stat-label">Providers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${Object.keys(data.licenses).length}</div>
+                        <div class="stat-label">License Types</div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Failed to load live stats:', error);
+            }
+        }
+    </script>
+</body>
+</html>
